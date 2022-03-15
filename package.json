@@ -1,6 +1,6 @@
 {
   "name": "@kj455/react-use-search",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "React hook for filtering and sorting",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
