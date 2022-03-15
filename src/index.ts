@@ -1,48 +1,22 @@
 import { useCallback, useMemo, useState } from 'react';
+import { Options, InitKeys, UseSearchResponse } from './types';
 
-type FilterOption<T> = {
-  condition: (val: T) => boolean;
-  groupKey?: string;
-};
-
-type SortOption<T> = {
-  rule: (a: T, b: T) => number;
-};
-
-type UseSearchResponse<T, FilterKey extends string, SortKey extends string> = {
-  results: T[];
-  filterOptions?: Record<FilterKey, FilterOption<T>>;
-  filterKeyList: FilterKey[];
-  setFilter: (key: FilterKey) => void;
-  addFilter: (key: FilterKey) => void;
-  removeFilter: (key: FilterKey) => void;
-  resetFilter: () => void;
-  sortOptions?: Record<SortKey, SortOption<T>>;
-  sortKeyList: SortKey[];
-  setSort: (key: SortKey) => void;
-  addSort: (key: SortKey) => void;
-  removeSort: (key: SortKey) => void;
-  resetSort: () => void;
-};
-
-type UseSearch = <T, FilterKey extends string, SortKey extends string>(
+export function useSearch<
+  T,
+  FilterKey extends string,
+  SortKey extends string,
+  InitFK extends FilterKey,
+  InitSK extends SortKey
+>(
   list: T[],
-  options: {
-    filterOptions?: Record<FilterKey, FilterOption<T>>;
-    sortOptions?: Record<SortKey, SortOption<T>>;
-  },
-  initKeys?: { filter?: FilterKey; sort?: SortKey }
-) => UseSearchResponse<T, FilterKey, SortKey>;
-
-export const useSearch: UseSearch = (
-  list,
-  { filterOptions, sortOptions },
-  initKeys
-) => {
-  const [filterKeyList, setFilterKeyList] = useState(
+  options: Options<T, FilterKey, SortKey>,
+  initKeys?: InitKeys<InitFK, InitSK>
+): UseSearchResponse<T, FilterKey, SortKey> {
+  const { filterOptions, sortOptions } = options;
+  const [filterKeyList, setFilterKeyList] = useState<FilterKey[]>(
     initKeys?.filter ? [initKeys.filter] : []
   );
-  const [sortKeyList, setSortKeyList] = useState(
+  const [sortKeyList, setSortKeyList] = useState<SortKey[]>(
     initKeys?.sort ? [initKeys.sort] : []
   );
 
@@ -130,4 +104,4 @@ export const useSearch: UseSearch = (
       setSortKeyList([]);
     }, []),
   };
-};
+}
