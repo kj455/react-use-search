@@ -4,7 +4,7 @@ This hook allows you to implement complex filtering and sorting operations on ar
 
 ## 🌟 features
 
-- **type-safe** filter and sort operations
+- \*\*type-sasort and sort operations
 - **multiple** filter conditions supporting both `AND` and `OR`
 - **multiple** sorting conditions
 
@@ -57,7 +57,7 @@ NOTE: By default, **`AND`** condition is used for filtering.
 
 if multiple sort keys are specified, the items will be sorted by the first sort condition, then by the second sort condition, and so on.
 
-#### Basic example
+#### 🐶 Basic example
 
 Basic filtering. Demo [here](https://codesandbox.io/s/dreamy-mcclintock-w36fqq?file=/src/App.tsx).
 
@@ -87,9 +87,12 @@ export default function App() {
 }
 ```
 
-#### Advanced example
+#### 🐱 Advanced example
 
-Combination of `AND` and `OR` conditions. Demo [here](https://codesandbox.io/s/solitary-surf-ehoudx?file=/src/App.tsx).
+- Combination of `AND` and `OR` conditions
+- Specification of initial filter key
+
+Demo [here](https://codesandbox.io/s/solitary-surf-ehoudx?file=/src/App.tsx).
 
 ```ts
 const list = [
@@ -114,8 +117,26 @@ export default function App() {
         groupKey: "anime"
       }
     },
-  });
+  }, { filter: 'POKEMON' });
 
   return (...)
 }
 ```
+
+#### :memo: All Returned Values
+
+| name          | description                                               |
+| ------------- | --------------------------------------------------------- |
+| results       | Array after filtered and sorted                           |
+| filterKeyList | Array of keys for the current filter conditions           |
+| filterOptions | Object same as filterOption received as argument          |
+| setFilter     | Function to set filter KEY after emptying `filterKeyList` |
+| addFilter     | Function to add filter KEY to `filterKeyList`             |
+| removeFilter  | Function to remove filter KEY from `filterKeyList`        |
+| resetFilter   | Function to empty `filterKeyList`                         |
+| sortKeyList   | Array of keys for the current sort rules                  |
+| sortOptions   | Object same as sortOption received as argument            |
+| setSort       | Function to set sort KEY after emptying `sortKeyList`     |
+| addSort       | Function to add sort KEY to `sortKeyList`                 |
+| removeSort    | Function to remove sort KEY from `sortKeyList`            |
+| resetSort     | Function to empty `sortKeyList`                           |
