@@ -4,7 +4,7 @@ This hook allows you to implement complex filtering and sorting operations on ar
 
 ## 🌟 features
 
-- \*\*type-sasort and sort operations
+- **type-safe** filter and sort operations
 - **multiple** filter conditions supporting both `AND` and `OR`
 - **multiple** sorting conditions
 
